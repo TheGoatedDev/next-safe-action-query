@@ -10,6 +10,7 @@ import type {
 	InferSafeActionFnResult,
 	SafeActionFn,
 } from "next-safe-action";
+import type { HookSafeActionFn } from "next-safe-action/hooks";
 
 // Custom error class for safe action errors
 export class SafeActionError extends Error {
@@ -49,10 +50,11 @@ export type SafeActionQueryOptionsWithOutInput<
 /**
  * Generic hook for using Next Safe Actions with TanStack Query
  * Properly infers types from the safe action function
+ * Supports actions with or without bind arguments
  */
 export function useSafeActionQuery<
 	// biome-ignore lint/suspicious/noExplicitAny: next-safe-action compatibility
-	TAction extends SafeActionFn<any, any, any, any, any>,
+	TAction extends HookSafeActionFn<any, any, any, any>,
 	TData = NonNullable<InferSafeActionFnResult<TAction>["data"]>,
 	TInput = InferSafeActionFnInput<TAction>["clientInput"],
 >(
