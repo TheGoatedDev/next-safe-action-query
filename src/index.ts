@@ -48,12 +48,12 @@ export type SafeActionQueryOptionsWithOutInput<
 
 /**
  * Generic hook for using Next Safe Actions with TanStack Query
- * Uses simple type inference based on usage
+ * Properly infers types from the safe action function
  */
 export function useSafeActionQuery<
 	// biome-ignore lint/suspicious/noExplicitAny: next-safe-action compatibility
 	TAction extends SafeActionFn<any, any, any, any, any>,
-	TData = InferSafeActionFnResult<TAction>["data"],
+	TData = NonNullable<InferSafeActionFnResult<TAction>["data"]>,
 	TInput = InferSafeActionFnInput<TAction>["clientInput"],
 >(
 	queryKey: QueryKey,
