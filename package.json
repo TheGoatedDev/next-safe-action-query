@@ -29,7 +29,12 @@
 		"fix:deps": "syncpack fix-mismatches && syncpack format",
 		"lint:deps": "syncpack lint",
 		"release": "pnpm build && changeset publish",
-		"version": "changeset version"
+		"version": "changeset version",
+		"test": "vitest",
+		"test:run": "vitest run",
+		"test:coverage": "vitest run --coverage",
+		"test:watch": "vitest --watch",
+		"test:ui": "vitest --ui"
 	},
 	"keywords": [
 		"nextjs",
@@ -45,11 +50,20 @@
 	"packageManager": "pnpm@10.8.1",
 	"devDependencies": {
 		"@changesets/cli": "2.29.5",
+		"@testing-library/jest-dom": "^6.6.4",
+		"@testing-library/react": "^16.3.0",
+		"@testing-library/user-event": "^14.6.1",
 		"@types/node": "24.1.0",
+		"@types/react": "^19.1.8",
 		"esbuild": "0.25.8",
 		"glob": "11.0.3",
+		"happy-dom": "^18.0.1",
+		"jsdom": "^26.1.0",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
 		"syncpack": "13.0.4",
-		"typescript": "5.8.3"
+		"typescript": "5.8.3",
+		"vitest": "^3.2.4"
 	},
 	"dependencies": {
 		"@tanstack/react-query": "5.83.0",
