@@ -1,7 +1,7 @@
 {
 	"name": "next-safe-action-query",
 	"description": "Type-safe server actions with built-in validation for Next.js",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"main": "./dist/cjs/index.cjs",
 	"module": "./dist/esm/index.js",
