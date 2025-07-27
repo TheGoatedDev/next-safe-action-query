@@ -1,5 +1,11 @@
 # next-safe-action-query
 
+## 1.0.2
+
+### Patch Changes
+
+- b798570: Fixing the Return type again
+
 ## 1.0.1
 
 ### Patch Changes
