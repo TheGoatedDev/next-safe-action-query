@@ -1,0 +1,58 @@
+{
+	"name": "next-safe-action-query",
+	"description": "Type-safe server actions with built-in validation for Next.js",
+	"version": "0.0.0",
+	"type": "module",
+	"main": "./dist/cjs/index.cjs",
+	"module": "./dist/esm/index.js",
+	"types": "./dist/types/index.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/types/index.d.ts",
+				"default": "./dist/esm/index.js"
+			},
+			"require": {
+				"types": "./dist/types/index.d.ts",
+				"default": "./dist/cjs/index.cjs"
+			}
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "node build.js",
+		"changeset": "changeset",
+		"clean": "rm -rf dist",
+		"dev": "pnpm build --watch",
+		"fix:deps": "syncpack fix-mismatches && syncpack format",
+		"lint:deps": "syncpack lint",
+		"release": "pnpm build && changeset publish",
+		"version": "changeset version"
+	},
+	"keywords": [
+		"nextjs",
+		"server-actions",
+		"type-safety",
+		"typescript",
+		"validation",
+		"tanstack-query",
+		"next-safe-action"
+	],
+	"author": "thegoateddev",
+	"license": "MIT",
+	"packageManager": "pnpm@10.8.1",
+	"devDependencies": {
+		"@changesets/cli": "2.29.5",
+		"@types/node": "24.1.0",
+		"esbuild": "0.25.8",
+		"glob": "11.0.3",
+		"syncpack": "13.0.4",
+		"typescript": "5.8.3"
+	},
+	"dependencies": {
+		"@tanstack/react-query": "5.83.0",
+		"next-safe-action": "8.0.8"
+	}
+}
