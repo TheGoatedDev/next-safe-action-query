@@ -60,7 +60,7 @@ export function useSafeActionQuery<
 	queryKey: QueryKey,
 	action: TAction,
 	options: UseSafeActionQueryOptions<TData, TInput>,
-) {
+): SafeActionQueryResult<TData> {
 	const {
 		actionInput,
 		onServerError,
