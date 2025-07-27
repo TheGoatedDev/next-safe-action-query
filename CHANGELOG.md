@@ -1,5 +1,11 @@
 # next-safe-action-query
 
+## 1.0.4
+
+### Patch Changes
+
+- de2b9e8: 3rd time the charm
+
 ## 1.0.3
 
 ### Patch Changes
