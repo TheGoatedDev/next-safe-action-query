@@ -1,5 +1,11 @@
 # next-safe-action-query
 
+## 1.0.3
+
+### Patch Changes
+
+- 657e10f: Fixed the TData Problem hopefully
+
 ## 1.0.2
 
 ### Patch Changes
