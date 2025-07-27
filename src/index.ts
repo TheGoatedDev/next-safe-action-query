@@ -10,7 +10,6 @@ import type {
 	InferSafeActionFnResult,
 	SafeActionFn,
 } from "next-safe-action";
-import type { HookSafeActionFn } from "next-safe-action/hooks";
 
 // Custom error class for safe action errors
 export class SafeActionError extends Error {
@@ -38,11 +37,11 @@ export interface UseSafeActionQueryOptions<TData, TInput>
 
 export type SafeActionQueryOptionsWithOutInput<
 	// biome-ignore lint/suspicious/noExplicitAny: next-safe-action compatibility
-	TAction extends HookSafeActionFn<any, any, any, any>,
+	TAction extends SafeActionFn<any, any, any, any, any>,
 > = Omit<
 	UseSafeActionQueryOptions<
 		InferSafeActionFnResult<TAction>["data"],
-		InferSafeActionFnInput<TAction>
+		InferSafeActionFnInput<TAction>["clientInput"]
 	>,
 	"actionInput"
 >;
@@ -53,7 +52,7 @@ export type SafeActionQueryOptionsWithOutInput<
  */
 export function useSafeActionQuery<
 	// biome-ignore lint/suspicious/noExplicitAny: next-safe-action compatibility
-	TAction extends HookSafeActionFn<any, any, any, any>,
+	TAction extends SafeActionFn<any, any, any, any, any>,
 	TData = InferSafeActionFnResult<TAction>["data"],
 	TInput = InferSafeActionFnInput<TAction>["clientInput"],
 >(
