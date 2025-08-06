@@ -1,5 +1,11 @@
 # next-safe-action-query
 
+## 1.1.1
+
+### Patch Changes
+
+- 89bfee1: Making Dependencies, peer
+
 ## 1.1.0
 
 ### Minor Changes
