@@ -1,5 +1,11 @@
 # next-safe-action-query
 
+## 1.1.0
+
+### Minor Changes
+
+- d0e14ab: Fixing Legacy Compatability
+
 ## 1.0.4
 
 ### Patch Changes
