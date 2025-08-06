@@ -65,8 +65,8 @@
 		"typescript": "5.8.3",
 		"vitest": "^3.2.4"
 	},
-	"dependencies": {
-		"@tanstack/react-query": "5.83.0",
-		"next-safe-action": "8.0.8"
+	"peerDependencies": {
+		"@tanstack/react-query": ">=5.0.0",
+		"next-safe-action": ">=8.0.0"
 	}
 }
