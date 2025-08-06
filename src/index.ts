@@ -31,9 +31,13 @@ export interface UseSafeActionQueryOptions<TData, TInput>
 		"queryKey" | "queryFn"
 	> {
 	actionInput: TInput;
-	onServerError?: (error: string) => void;
+	onServerError?: (error: Error) => void;
 	onValidationErrors?: (errors: string[]) => void;
 	onNetworkError?: (error: Error) => void;
+
+	// This is for compatibility with the useQuery hook
+	onSuccess?: (data: TData) => void;
+	onError?: (error: Error) => void;
 }
 
 export type SafeActionQueryOptionsWithOutInput<
@@ -54,8 +58,8 @@ export type SafeActionQueryOptionsWithOutInput<
  */
 export function useSafeActionQuery<
 	// biome-ignore lint/suspicious/noExplicitAny: next-safe-action compatibility
-	TAction extends HookSafeActionFn<any, any, any, any>,
-	TData = NonNullable<InferSafeActionFnResult<TAction>["data"]>,
+	TAction extends HookSafeActionFn<any, any, any, TData>,
+	TData = InferSafeActionFnResult<TAction>["data"],
 	TInput = InferSafeActionFnInput<TAction>["clientInput"],
 >(
 	queryKey: QueryKey,
@@ -67,6 +71,8 @@ export function useSafeActionQuery<
 		onServerError,
 		onValidationErrors,
 		onNetworkError,
+		onSuccess,
+		onError,
 		...queryOptions
 	} = options;
 
@@ -79,6 +85,7 @@ export function useSafeActionQuery<
 				// Handle server errors
 				if (result?.serverError) {
 					onServerError?.(result.serverError);
+					onError?.(new Error(result.serverError));
 					throw new SafeActionError(result.serverError, "server");
 				}
 
@@ -86,6 +93,7 @@ export function useSafeActionQuery<
 				if (result?.validationErrors) {
 					const errors = result.validationErrors._errors ?? [];
 					onValidationErrors?.(errors);
+					onError?.(new Error(errors.join(", ") || "Validation failed"));
 					throw new SafeActionError(
 						errors.join(", ") || "Validation failed",
 						"validation",
@@ -93,10 +101,11 @@ export function useSafeActionQuery<
 					);
 				}
 
-				// Ensure we have data
 				if (result?.data === undefined || result?.data === null) {
 					throw new SafeActionError("No data returned from action", "server");
 				}
+
+				onSuccess?.(result.data);
 
 				return result.data as TData;
 			} catch (error) {
@@ -108,6 +117,7 @@ export function useSafeActionQuery<
 				const networkError =
 					error instanceof Error ? error : new Error("Unknown error occurred");
 				onNetworkError?.(networkError);
+				onError?.(networkError);
 				throw new SafeActionError(
 					`Network error: ${networkError.message}`,
 					"network",
@@ -115,7 +125,7 @@ export function useSafeActionQuery<
 				);
 			}
 		},
-		retry: (failureCount, error) => {
+		retry: (failureCount: number, error: Error) => {
 			// Don't retry validation errors
 			if (error instanceof SafeActionError && error.type === "validation") {
 				return false;
@@ -138,3 +148,11 @@ export function useSafeActionQuery<
 export type SafeActionQueryResult<TData> = ReturnType<
 	typeof useQuery<TData, SafeActionError>
 >;
+
+export type { QueryKey } from "@tanstack/react-query";
+export type {
+	InferSafeActionFnInput,
+	InferSafeActionFnResult,
+	SafeActionFn,
+} from "next-safe-action";
+export type { HookSafeActionFn } from "next-safe-action/hooks";
