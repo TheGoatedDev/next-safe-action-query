@@ -1,7 +1,7 @@
 {
 	"name": "next-safe-action-query",
 	"description": "Type-safe server actions with built-in validation for Next.js",
-	"version": "1.0.4",
+	"version": "1.1.0",
 	"type": "module",
 	"main": "./dist/cjs/index.cjs",
 	"module": "./dist/esm/index.js",
@@ -65,8 +65,8 @@
 		"typescript": "5.8.3",
 		"vitest": "^3.2.4"
 	},
-	"dependencies": {
-		"@tanstack/react-query": "5.83.0",
-		"next-safe-action": "8.0.8"
+	"peerDependencies": {
+		"@tanstack/react-query": ">=5.0.0",
+		"next-safe-action": ">=8.0.0"
 	}
 }

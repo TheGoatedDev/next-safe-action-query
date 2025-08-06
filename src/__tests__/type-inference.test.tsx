@@ -284,9 +284,10 @@ describe("TypeScript Type Inference Validation", () => {
 		it("should have properly typed callback parameters", async () => {
 			const userAction = createTypedUserAction();
 
-			const onServerError = vi.fn((error: string) => {
+			const onServerError = vi.fn((error: Error) => {
 				// error should be typed as string
-				expect(typeof error).toBe("string");
+				expect(error instanceof Error).toBe(true);
+				expect(typeof error.message).toBe("string");
 			});
 
 			const onValidationErrors = vi.fn((errors: string[]) => {

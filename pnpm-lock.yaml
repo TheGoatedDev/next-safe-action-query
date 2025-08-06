@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       '@tanstack/react-query':
-        specifier: 5.83.0
+        specifier: '>=5.0.0'
         version: 5.83.0(react@19.1.0)
       next-safe-action:
-        specifier: 8.0.8
+        specifier: '>=8.0.0'
         version: 8.0.8(next@15.4.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
     devDependencies:
       '@changesets/cli':
